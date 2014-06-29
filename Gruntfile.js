@@ -113,6 +113,33 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    copy: {
+      fonts: {
+        expand: true,
+        cwd: 'src/',
+        src: 'assets/fonts/*',
+        dest: 'dist/'
+      },
+      images: {
+        expand: true,
+        cwd: 'src/',
+        src: 'assets/images/*',
+        dest: 'dist/'
+      },
+      js: {
+        expand: true,
+        cwd: 'src/',
+        src: ['assets/javascripts/*.js', 'assets/javascripts/**/*.js'],
+        dest: 'dist/'
+      },
+      misc: {
+        expand: true,
+        cwd: 'src/',
+        src: ['favicon.ico', 'robots.txt'],
+        dest: 'dist/'
+      }
+    },
 	});
 
 	// Tasks
