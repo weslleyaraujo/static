@@ -48,14 +48,7 @@ module.exports = function (grunt) {
       }
     },
 
-		watch: {
-			templates: {
-				files: ['src/templates/*'],
-				tasks: ['render:dev']
-			}
-		},
-
-
+		// Compass render
 		compass: {
 			dev: {
 				options: {
@@ -75,8 +68,23 @@ module.exports = function (grunt) {
 					environment: 'production'
 				}
 			}
-		}
+		},
 
+		// Watch dev tasks
+		watch: {
+			templates: {
+				files: ['src/templates/*'],
+				tasks: ['render:dev']
+			},
+
+			sass: {
+				files: [
+					'src/assets/sass/*.sass',
+					'src/assets/sass/**/*.sass',
+				],
+				tasks: ['compass:dev']
+			}
+		},
 	});
 
 };
