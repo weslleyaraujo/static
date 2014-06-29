@@ -95,6 +95,24 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    // HTML Minify
+    htmlmin: {
+      compile: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          keepClosingSlash: false,
+          caseSensitive: true
+        },
+        files: {
+          'dist/index.html': 'dist/index.html'
+        }
+      }
+    },
 	});
 
 	// Tasks
