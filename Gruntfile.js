@@ -53,6 +53,28 @@ module.exports = function (grunt) {
 				files: ['src/templates/*'],
 				tasks: ['render:dev']
 			}
+		},
+
+
+		compass: {
+			dev: {
+				options: {
+					sassDir: 'src/assets/sass',
+					cssDir: 'src/assets/css',
+					imagesDir: 'assets/images',
+					environment: 'development'
+				}
+			},
+			dist: {
+				options: {
+					sassDir: 'src/assets/sass',
+					cssDir: 'src/assets/css',
+					imagesDir: 'assets/images',
+					outputStyle: 'compressed',
+					noLineComments: true,
+					environment: 'production'
+				}
+			}
 		}
 
 	});
