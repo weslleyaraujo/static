@@ -85,6 +85,22 @@ module.exports = function (grunt) {
 				tasks: ['compass:dev']
 			}
 		},
+
+    // Static Webserver
+    connect: {
+      server: {
+        options: {
+          port: 8180,
+          base: 'dist'
+        }
+      }
+    },
 	});
+
+	// Tasks
+  grunt.registerTask('develop', [
+    'connect',
+    'watch'
+  ]);
 
 };
