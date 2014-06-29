@@ -23,6 +23,7 @@
     "load-grunt-tasks": "~0.6.0",
     "grunt-contrib-compass": "~0.9.0",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-ejs-render": "~0.2.5"
+    "grunt-ejs-render": "~0.2.5",
+    "grunt-contrib-imagemin": "~0.7.1"
   }
 }

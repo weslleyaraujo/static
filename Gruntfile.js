@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 		render: {
 			dev: {
 				files: {
-          'compiled/index.html': ['src/index.html']
+          'dist/index.html': ['src/index.html']
 				},
 				options: {
 					data: {
@@ -19,8 +19,34 @@ module.exports = function (grunt) {
 						pkg: grunt.config('pkg')
 					}
 				}
+			},
+			dist: {
+				files: {
+          'dist/index.html': ['src/index.html']
+				},
+				options: {
+					data: {
+						dev: false,
+						pkg: grunt.config('pkg')
+					}
+				}
 			}
 		},
+
+		// Image minification
+    imagemin: {
+      main: {
+        options: {
+          optimizationLevel: 3
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: 'assets/images/*.{png,jpg,gif,svg}',
+          dest: 'dist'
+        }]
+      }
+    },
 
 		watch: {
 			templates: {
