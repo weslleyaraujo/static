@@ -40,5 +40,4 @@ node_modules
 bower_components
 
 ### package ###
-#function gi() {
 compiled/

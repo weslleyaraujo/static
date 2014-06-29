@@ -1,0 +1,28 @@
+{
+  "name": "static",
+  "version": "0.0.0",
+  "description": "Initial start for static sites",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weslleyaraujo/static.git"
+  },
+  "keywords": [
+    "website",
+    "static",
+    "grunt"
+  ],
+  "author": "Weslley Araujo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weslleyaraujo/static/issues"
+  },
+  "homepage": "https://github.com/weslleyaraujo/static",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "load-grunt-tasks": "~0.6.0",
+    "grunt-contrib-compass": "~0.9.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-ejs-render": "~0.2.5"
+  }
+}
