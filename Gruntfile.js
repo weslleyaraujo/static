@@ -127,12 +127,6 @@ module.exports = function (grunt) {
         src: 'assets/images/*',
         dest: 'dist/'
       },
-      js: {
-        expand: true,
-        cwd: 'src/',
-        src: ['assets/javascripts/*.js', 'assets/javascripts/**/*.js'],
-        dest: 'dist/'
-      },
       misc: {
         expand: true,
         cwd: 'src/',
@@ -145,7 +139,19 @@ module.exports = function (grunt) {
     cssmin: {
       compile: {
         files: {
-          'dist/css/main.min.css': ['src/assets/css/*.css', 'src/assets/css/**/*.css']
+          'dist/assets/css/main.min.css': ['src/assets/css/*.css', 'src/assets/css/**/*.css']
+        }
+      }
+    },
+
+    // Uglify
+    uglify: {
+      compile: {
+        files: {
+          'dist/assets/javascripts/main.min.js': [
+						// keep your javascript order here
+						'src/assets/javascripts/*.js',
+					]
         }
       }
     },
@@ -160,6 +166,7 @@ module.exports = function (grunt) {
   grunt.registerTask('dist', [
 		'render:dist',
 		'compass:dist',
+		'uglify'
   ]);
 
 };
