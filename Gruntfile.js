@@ -155,6 +155,10 @@ module.exports = function (grunt) {
         }
       }
     },
+
+		clean: [
+			'dist'
+		]
 	});
 
 	// Tasks
