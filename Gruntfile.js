@@ -140,12 +140,26 @@ module.exports = function (grunt) {
         dest: 'dist/'
       }
     },
+
+    // CSS Minify
+    cssmin: {
+      compile: {
+        files: {
+          'dist/css/main.min.css': ['src/assets/css/*.css', 'src/assets/css/**/*.css']
+        }
+      }
+    },
 	});
 
 	// Tasks
   grunt.registerTask('develop', [
     'connect',
     'watch'
+  ]);
+
+  grunt.registerTask('dist', [
+		'render:dist',
+		'compass:dist',
   ]);
 
 };
