@@ -55,7 +55,9 @@ module.exports = function (grunt) {
 					sassDir: 'src/assets/sass',
 					cssDir: 'src/assets/css',
 					imagesDir: 'assets/images',
-					environment: 'development'
+					outputStyle: 'nested',
+					environment: 'development',
+					force: true
 				}
 			},
 			dist: {
@@ -121,6 +123,15 @@ module.exports = function (grunt) {
         src: 'assets/fonts/*',
         dest: 'dist/'
       },
+      css: {
+        expand: true,
+        cwd: 'src/',
+        src: [
+					'assets/css/*', 
+					'assets/css/**/*.css', 
+				],
+        dest: 'dist/'
+      },
       images: {
         expand: true,
         cwd: 'src/',
@@ -130,7 +141,10 @@ module.exports = function (grunt) {
       misc: {
         expand: true,
         cwd: 'src/',
-        src: ['favicon.ico', 'robots.txt'],
+        src: [
+					'favicon.ico',
+					'robots.txt'
+				],
         dest: 'dist/'
       }
     },
@@ -148,9 +162,18 @@ module.exports = function (grunt) {
     uglify: {
       compile: {
         files: {
-          'dist/assets/javascripts/main.min.js': [
+					// common files
+          'dist/assets/javascripts/main.js': [
 						// keep your javascript order here
 						'src/assets/javascripts/*.js',
+					],
+
+					// vendor files
+          'dist/assets/javascripts/vendor.js': [
+						// keep your javascript order here
+						'bower_components/jquery/dist/jquery.min.js',
+						'bower_components/underscore/underscore.js',
+						'bower_components/backbone/backbone.js'
 					]
         }
       }
@@ -163,6 +186,9 @@ module.exports = function (grunt) {
 
 	// Tasks
   grunt.registerTask('develop', [
+    'render:dev',
+    'compass:dev',
+    'copy',
     'connect',
     'watch'
   ]);
