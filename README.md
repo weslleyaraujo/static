@@ -120,3 +120,5 @@ Just open your browser at http://localhost:8180
 [Compass]:http://compass-style.org/
 [Bower]:http://bower.io/
 [SMACSS]:https://smacss.com/
+[@vojtajina]:http://github.com/vojtajina/
+[Grunt Bump]:http://github.com/vojtajina/grunt-bump/
