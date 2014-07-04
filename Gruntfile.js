@@ -200,6 +200,21 @@ module.exports = function (grunt) {
       }
     },
 
+  bump: {
+    options: {
+      files: ['package.json'],
+      commit: true,
+      commitMessage: 'Release v%VERSION%',
+      commitFiles: ['package.json'],
+      createTag: true,
+      tagName: 'v%VERSION%',
+      tagMessage: 'Version %VERSION%',
+      push: true,
+      pushTo: 'origin',
+      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+    }
+  },
+
     clean: [
       'dist'
     ]
@@ -216,6 +231,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist', [
     'clean',
+    'bump',
     'render:dist',
     'compass:dist',
     'cssmin',
