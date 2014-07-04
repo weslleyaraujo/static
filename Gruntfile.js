@@ -180,10 +180,9 @@ module.exports = function (grunt) {
 
           // vendor files
           'dist/assets/javascripts/vendor.js': [
-            // keep your javascript order here
-            'bower_components/jquery/dist/jquery.min.js',
-            'bower_components/underscore/underscore.js',
-            'bower_components/backbone/backbone.js'
+            // keep your javascript vendor files in order here
+            // example:
+            // 'bower_components/jquery/dist/jquery.min.js',
           ]
         }
       }
@@ -232,8 +231,10 @@ module.exports = function (grunt) {
     'compass:dist',
     'cssmin',
     'uglify',
+    'imagemin',
     'cacheBust',
-    'htmlmin'
+    'htmlmin',
+    'copy'
   ]);
 
 };
