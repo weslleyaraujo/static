@@ -1,39 +1,40 @@
 module.exports = function (grunt) {
-	'use strict';
+  'use strict';
 
-	// Load grunt tasks
-	require('load-grunt-tasks')(grunt);
+  // Load grunt tasks
+  require('load-grunt-tasks')(grunt);
 
   grunt.config('pkg', grunt.file.readJSON('package.json'));
-	grunt.initConfig({
+  grunt.initConfig({
 
-		// Ejs render
-		render: {
-			dev: {
-				files: {
+    // Ejs render
+    render: {
+      dev: {
+        files: {
           'dist/index.html': ['src/index.html']
-				},
-				options: {
-					data: {
-						dev: true,
-						pkg: grunt.config('pkg')
-					}
-				}
-			},
-			dist: {
-				files: {
+        },
+        options: {
+          data: {
+            dev: true,
+            pkg: grunt.config('pkg')
+          }
+        }
+      },
+      dist: {
+        files: {
           'dist/index.html': ['src/index.html']
-				},
-				options: {
-					data: {
-						dev: false,
-						pkg: grunt.config('pkg')
-					}
-				}
-			}
-		},
+        },
+        options: {
+          data: {
+            dev: false,
+            pkg: grunt.config('pkg'),
+            seo: 'src/data/seo.json'
+          }
+        }
+      }
+    },
 
-		// Image minification
+    // Image minification
     imagemin: {
       main: {
         options: {
@@ -48,45 +49,45 @@ module.exports = function (grunt) {
       }
     },
 
-		// Compass render
-		compass: {
-			dev: {
-				options: {
-					sassDir: 'src/assets/sass',
-					cssDir: 'src/assets/css',
-					imagesDir: 'assets/images',
-					outputStyle: 'nested',
-					environment: 'development',
-					force: true
-				}
-			},
-			dist: {
-				options: {
-					sassDir: 'src/assets/sass',
-					cssDir: 'src/assets/css',
-					imagesDir: 'assets/images',
-					outputStyle: 'compressed',
-					noLineComments: true,
-					environment: 'production'
-				}
-			}
-		},
+    // Compass render
+    compass: {
+      dev: {
+        options: {
+          sassDir: 'src/assets/sass',
+          cssDir: 'src/assets/css',
+          imagesDir: 'assets/images',
+          outputStyle: 'nested',
+          environment: 'development',
+          force: true
+        }
+      },
+      dist: {
+        options: {
+          sassDir: 'src/assets/sass',
+          cssDir: 'src/assets/css',
+          imagesDir: 'assets/images',
+          outputStyle: 'compressed',
+          noLineComments: true,
+          environment: 'production'
+        }
+      }
+    },
 
-		// Watch dev tasks
-		watch: {
-			templates: {
-				files: ['src/templates/*'],
-				tasks: ['render:dev']
-			},
+    // Watch dev tasks
+    watch: {
+      templates: {
+        files: ['src/templates/*'],
+        tasks: ['render:dev']
+      },
 
-			sass: {
-				files: [
-					'src/assets/sass/*.sass',
-					'src/assets/sass/**/*.sass',
-				],
-				tasks: ['compass:dev']
-			}
-		},
+      sass: {
+        files: [
+          'src/assets/sass/*.sass',
+          'src/assets/sass/**/*.sass',
+        ],
+        tasks: ['compass:dev']
+      }
+    },
 
     // Static Webserver
     connect: {
@@ -127,9 +128,9 @@ module.exports = function (grunt) {
         expand: true,
         cwd: 'src/',
         src: [
-					'assets/css/*', 
-					'assets/css/**/*.css', 
-				],
+          'assets/css/*', 
+          'assets/css/**/*.css', 
+        ],
         dest: 'dist/'
       },
       images: {
@@ -142,9 +143,9 @@ module.exports = function (grunt) {
         expand: true,
         cwd: 'src/',
         src: [
-					'favicon.ico',
-					'robots.txt'
-				],
+          'favicon.ico',
+          'robots.txt'
+        ],
         dest: 'dist/'
       }
     },
@@ -162,29 +163,29 @@ module.exports = function (grunt) {
     uglify: {
       compile: {
         files: {
-					// common files
+          // common files
           'dist/assets/javascripts/main.js': [
-						// keep your javascript order here
-						'src/assets/javascripts/*.js',
-					],
+            // keep your javascript order here
+            'src/assets/javascripts/*.js',
+          ],
 
-					// vendor files
+          // vendor files
           'dist/assets/javascripts/vendor.js': [
-						// keep your javascript order here
-						'bower_components/jquery/dist/jquery.min.js',
-						'bower_components/underscore/underscore.js',
-						'bower_components/backbone/backbone.js'
-					]
+            // keep your javascript order here
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/underscore/underscore.js',
+            'bower_components/backbone/backbone.js'
+          ]
         }
       }
     },
 
-		clean: [
-			'dist'
-		]
-	});
+    clean: [
+      'dist'
+    ]
+  });
 
-	// Tasks
+  // Tasks
   grunt.registerTask('develop', [
     'render:dev',
     'compass:dev',
@@ -194,9 +195,9 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('dist', [
-		'render:dist',
-		'compass:dist',
-		'uglify'
+    'render:dist',
+    'compass:dist',
+    'uglify'
   ]);
 
 };
