@@ -153,9 +153,6 @@ module.exports = function (grunt) {
 
     // CSS Minify
     cssmin: {
-      options: {
-        banner: '<%= banner_name %>'
-      },
       compile: {
         files: {
           'dist/assets/css/main.css': [
@@ -231,7 +228,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist', [
     'clean',
-    'bump',
     'render:dist',
     'compass:dist',
     'cssmin',
@@ -239,6 +235,5 @@ module.exports = function (grunt) {
     'cacheBust',
     'htmlmin'
   ]);
-
 
 };
