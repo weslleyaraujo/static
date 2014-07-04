@@ -30,6 +30,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-clean": "~0.5.0"
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-cache-bust": "^0.3.9"
   }
 }

@@ -162,6 +162,10 @@ module.exports = function (grunt) {
             'src/assets/css/*.css',
             'src/assets/css/**/*.css',
             '!src/assets/css/normalize.css'
+          ],
+
+          'dist/assets/css/normalize.css': [
+            'src/assets/css/normalize.css'
           ]
         }
       }
@@ -188,6 +192,14 @@ module.exports = function (grunt) {
       }
     },
 
+    cacheBust: {
+      assets: {
+        files: [{
+          src: ['dist/index.html']
+        }]
+      }
+    },
+
     clean: [
       'dist'
     ]
@@ -207,7 +219,9 @@ module.exports = function (grunt) {
     'render:dist',
     'compass:dist',
     'cssmin',
-    'uglify'
+    'uglify',
+    'cacheBust',
+    'htmlmin'
   ]);
 
 
