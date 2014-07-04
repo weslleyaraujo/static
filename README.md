@@ -38,12 +38,15 @@ Tasks
 ```sh
 grunt develop
 ```
+Just open your brower ate http://localhost:8180 (the port can be change at `Gruntfile.js`)
 
 ###### Distribution package
 
 ```sh
 grunt dist
 ```
+
+A distribution package is created with minified files in `dist/` folder
 
 ###### Bump version
 
@@ -111,8 +114,6 @@ Sometimes you want to run another task between bumping the version and commiting
 $ grunt bump-only:minor
 $ grunt changelog
 $ grunt bump-commit
-
-Just open your browser at http://localhost:8180
 
 [Node js]:http://nodejs.org/
 [Grunt]:http://gruntjs.com/
