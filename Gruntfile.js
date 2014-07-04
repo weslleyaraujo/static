@@ -6,6 +6,8 @@ module.exports = function (grunt) {
 
   grunt.config('pkg', grunt.file.readJSON('package.json'));
   grunt.initConfig({
+    // create a banner name
+    banner_name: '/*! ' + grunt.config('pkg').name + ' - v' + grunt.config('pkg').version + ' */',
 
     // Ejs render
     render: {
@@ -27,8 +29,7 @@ module.exports = function (grunt) {
         options: {
           data: {
             dev: false,
-            pkg: grunt.config('pkg'),
-            seo: 'src/data/seo.json'
+            pkg: grunt.config('pkg')
           }
         }
       }
@@ -152,9 +153,16 @@ module.exports = function (grunt) {
 
     // CSS Minify
     cssmin: {
+      options: {
+        banner: '<%= banner_name %>'
+      },
       compile: {
         files: {
-          'dist/assets/css/main.min.css': ['src/assets/css/*.css', 'src/assets/css/**/*.css']
+          'dist/assets/css/main.css': [
+            'src/assets/css/*.css',
+            'src/assets/css/**/*.css',
+            '!src/assets/css/normalize.css'
+          ]
         }
       }
     },
@@ -195,9 +203,12 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('dist', [
+    'clean',
     'render:dist',
     'compass:dist',
+    'cssmin',
     'uglify'
   ]);
+
 
 };
