@@ -7,7 +7,7 @@ Its features includes a develop environment, distribution package, dependecies m
 Version
 ----
 
-0.0.1
+0.1.0
 
 Tech
 -----------
