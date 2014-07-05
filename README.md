@@ -114,6 +114,7 @@ Sometimes you want to run another task between bumping the version and commiting
 $ grunt bump-only:minor
 $ grunt changelog
 $ grunt bump-commit
+```
 
 [Node js]:http://nodejs.org/
 [Grunt]:http://gruntjs.com/
