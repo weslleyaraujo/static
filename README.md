@@ -116,6 +116,16 @@ $ grunt changelog
 $ grunt bump-commit
 ```
 
+And thats it :)
+
+License
+----
+
+MIT
+
+
+**Free Software, Hell Yeah!**
+
 [Node js]:http://nodejs.org/
 [Grunt]:http://gruntjs.com/
 [Sass]:http://sass-lang.com/
