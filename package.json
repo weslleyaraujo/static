@@ -32,6 +32,7 @@
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-cache-bust": "^0.3.9",
-    "grunt-bump": "0.0.14"
+    "grunt-bump": "0.0.14",
+    "grunt-contrib-concat": "^0.4.0"
   }
 }

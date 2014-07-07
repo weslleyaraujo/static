@@ -125,15 +125,6 @@ module.exports = function (grunt) {
         src: 'assets/fonts/*',
         dest: 'dist/'
       },
-      css: {
-        expand: true,
-        cwd: 'src/',
-        src: [
-          'assets/css/*', 
-          'assets/css/**/*.css', 
-        ],
-        dest: 'dist/'
-      },
       images: {
         expand: true,
         cwd: 'src/',
@@ -148,7 +139,29 @@ module.exports = function (grunt) {
           'robots.txt'
         ],
         dest: 'dist/'
+      },
+      css: {
+        expand: trueu
+        cwd: 'src/',
+        src: [
+          'assets/css/*',
+          'assets/css/**/*.css',
+        ],
+        dest: 'dist/'
       }
+    },
+
+    concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: [
+          // keep your javascript order here
+          'src/assets/javascripts/*.js',
+        ],
+        dest: 'dist/assets/javascripts/main.js'
+      },
     },
 
     // CSS Minify
@@ -196,37 +209,56 @@ module.exports = function (grunt) {
       }
     },
 
-  bump: {
-    options: {
-      files: ['package.json'],
-      commit: true,
-      commitMessage: 'Release v%VERSION%',
-      commitFiles: ['package.json'],
-      createTag: true,
-      tagName: 'v%VERSION%',
-      tagMessage: 'Version %VERSION%',
-      push: true,
-      pushTo: 'origin',
-      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
-    }
-  },
+    bump: {
+      options: {
+        files: ['package.json'],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json'],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      }
+    },
 
-    clean: [
-      'dist'
-    ]
+    clean: {
+      build: [
+        'dist'
+      ],
+
+      dev: [
+        'src/assets/css/',
+        'dist/assets/css/'
+      ]
+    }
   });
 
   // Tasks
+  grunt.registerTask('copy:dev', [
+    'copy',
+  ]);
+
+  grunt.registerTask('copy:build', [
+    'copy:images',
+    'copy:misc',
+    'copy:fonts'
+  ]);
+
   grunt.registerTask('develop', [
+    'clean:dev',
     'render:dev',
     'compass:dev',
+    'concat',
     'copy',
     'connect',
     'watch'
   ]);
 
-  grunt.registerTask('dist', [
-    'clean',
+  grunt.registerTask('build', [
+    'clean:build',
     'render:dist',
     'compass:dist',
     'cssmin',
@@ -234,7 +266,7 @@ module.exports = function (grunt) {
     'imagemin',
     'cacheBust',
     'htmlmin',
-    'copy'
+    'copy:build'
   ]);
 
 };
