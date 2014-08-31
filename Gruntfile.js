@@ -87,6 +87,14 @@ module.exports = function (grunt) {
           'src/assets/sass/**/*.sass',
         ],
         tasks: ['compass:dev']
+      },
+
+      scripts: {
+        files: [
+          'src/assets/javascripts/*.js',
+          'src/assets/javascripts/**/*.js',
+        ],
+        tasks: ['copy:scripts']
       }
     },
 
@@ -146,6 +154,15 @@ module.exports = function (grunt) {
         src: [
           'assets/css/*',
           'assets/css/**/*.css',
+        ],
+        dest: 'dist/'
+      },
+      scripts: {
+        expand: true,
+        cwd: 'src/',
+        src: [
+          'assets/javascripts/*',
+          'assets/javascripts/**/*.javascripts',
         ],
         dest: 'dist/'
       }
