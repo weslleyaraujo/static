@@ -43,7 +43,7 @@ Just open your brower ate http://localhost:8180 (the port can be change at `Grun
 ###### Distribution package
 
 ```sh
-grunt dist
+grunt build
 ```
 
 A distribution package is created with minified files in `dist/` folder
