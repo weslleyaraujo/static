@@ -77,7 +77,10 @@ module.exports = function (grunt) {
     // Watch dev tasks
     watch: {
       templates: {
-        files: ['src/templates/*'],
+        files: [
+          'src/templates/*',
+          'src/*.html'
+       ],
         tasks: ['render:dev']
       },
 
