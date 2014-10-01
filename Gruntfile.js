@@ -18,6 +18,9 @@ module.exports = function (grunt) {
         options: {
           data: {
             dev: true,
+            // Flag for vendor 
+            // change it if you will use vendor
+            has_vendor: false,
             pkg: grunt.config('pkg')
           }
         }
@@ -100,7 +103,10 @@ module.exports = function (grunt) {
           'src/assets/javascripts/*.js',
           'src/assets/javascripts/**/*.js',
         ],
-        tasks: ['copy:scripts']
+        tasks: [
+          'copy:scripts',
+          'concat',
+        ]
       }
     },
 
@@ -168,7 +174,7 @@ module.exports = function (grunt) {
         cwd: 'src/',
         src: [
           'assets/javascripts/*',
-          'assets/javascripts/**/*.javascripts',
+          'assets/javascripts/**/*.js',
         ],
         dest: 'dist/'
       }
