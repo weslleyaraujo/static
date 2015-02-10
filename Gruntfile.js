@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   grunt.config('pkg', grunt.file.readJSON('package.json'));
   grunt.initConfig({
     // create a banner name
-    banner_name: '/*! ' + grunt.config('pkg').name + ' - v' + grunt.config('pkg').version + ' */',
+    banner_name: '/*! ' + grunt.config('pkg').name + ' - v ' + grunt.config('pkg').version + ' */',
 
     // Ejs render
     render: {
@@ -32,6 +32,7 @@ module.exports = function (grunt) {
         options: {
           data: {
             dev: false,
+            has_vendor: false,
             pkg: grunt.config('pkg')
           }
         }
@@ -59,20 +60,22 @@ module.exports = function (grunt) {
         options: {
           sassDir: 'src/assets/sass',
           cssDir: 'src/assets/css',
-          imagesDir: 'assets/images',
+          imagesDir: 'src/assets/images',
           outputStyle: 'nested',
           environment: 'development',
-          force: true
+          force: true,
+          raw: 'http_generated_images_path = \'/assets/images\''
         }
       },
       dist: {
         options: {
           sassDir: 'src/assets/sass',
           cssDir: 'src/assets/css',
-          imagesDir: 'assets/images',
+          imagesDir: 'dist/assets/images',
           outputStyle: 'compressed',
           noLineComments: true,
-          environment: 'production'
+          environment: 'production',
+          raw: 'http_generated_images_path = \'/assets/images\''
         }
       }
     },
@@ -81,6 +84,7 @@ module.exports = function (grunt) {
     watch: {
       templates: {
         files: [
+          '*.json',
           'src/templates/*',
           'src/*.html'
        ],
@@ -106,6 +110,15 @@ module.exports = function (grunt) {
         tasks: [
           'copy:scripts',
           'concat',
+        ]
+      },
+
+      images: {
+        files: [
+          'src/assets/images/*',
+        ],
+        tasks: [
+          'copy:images'
         ]
       }
     },
@@ -148,7 +161,7 @@ module.exports = function (grunt) {
       images: {
         expand: true,
         cwd: 'src/',
-        src: 'assets/images/*',
+        src: 'assets/images/**',
         dest: 'dist/'
       },
       misc: {
@@ -177,7 +190,17 @@ module.exports = function (grunt) {
           'assets/javascripts/**/*.js',
         ],
         dest: 'dist/'
-      }
+      },
+
+      // vendor: {
+      //   expand: true,
+      //   cwd: 'bower_components/',
+      //   src: [
+      //     // keep your js order
+      //     'jquery/dist/jquery.js',
+      //   ],
+      //   dest: 'dist/assets/bower_components'
+      // }
     },
 
     concat: {
@@ -221,11 +244,10 @@ module.exports = function (grunt) {
           ],
 
           // vendor files
-          'dist/assets/javascripts/vendor.js': [
-            // keep your javascript vendor files in order here
-            // example:
-            // 'bower_components/jquery/dist/jquery.min.js',
-          ]
+          // 'dist/assets/javascripts/vendor.js': [
+          //   // keep your javascript vendor files in order here
+          //   'bower_components/jquery/dist/jquery.min.js',
+          // ]
         }
       }
     },
@@ -255,6 +277,7 @@ module.exports = function (grunt) {
 
     clean: {
       build: [
+        '*.zip',
         'dist'
       ],
 
@@ -262,12 +285,26 @@ module.exports = function (grunt) {
         'src/assets/css/',
         'dist/assets/css/'
       ]
+    },
+
+    compress: {
+      main: {
+        options: {
+          archive: grunt.config('pkg').name + '-v' + grunt.config('pkg').version + '.zip'
+        },
+        files: [
+          {
+            src: ['dist/**']
+          }
+        ]
+      }
     }
+
   });
 
   // Tasks
   grunt.registerTask('copy:dev', [
-    'copy',
+    'copy'
   ]);
 
   grunt.registerTask('copy:build', [
@@ -279,6 +316,7 @@ module.exports = function (grunt) {
   grunt.registerTask('develop', [
     'clean:dev',
     'render:dev',
+    'copy:images',
     'compass:dev',
     'concat',
     'copy',
@@ -295,7 +333,8 @@ module.exports = function (grunt) {
     'imagemin',
     'cacheBust',
     'htmlmin',
-    'copy:build'
+    'copy:build',
+    'compress'
   ]);
 
 };
