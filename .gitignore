@@ -50,3 +50,4 @@ Session.vim
 ### package ###
 dist/
 src/assets/css/
+*.zip
